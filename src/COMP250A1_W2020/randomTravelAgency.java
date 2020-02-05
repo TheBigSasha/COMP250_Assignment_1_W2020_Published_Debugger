@@ -9,7 +9,7 @@ import java.util.Random;
  * <p>
  * Seed, name, numberOfNights, and balance are class variables, as they must be kept consistent for a given customer.
  *
- * @author Sasha Aleshchenko ID: 260923564
+ * @author Sasha Aleshchenko
  */
 public class randomTravelAgency extends Random {
     private String inputName;
