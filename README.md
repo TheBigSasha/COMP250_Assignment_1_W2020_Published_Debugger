@@ -1,4 +1,4 @@
-# COMP250_Assignment_1_W2020_Published_Debugger
+# COMP250 Assignment 1 Winter 2020 Debugger
 A series of testers for COMP250 Assignment 1 at McGill University.
 
 To test your program:
