@@ -181,8 +181,10 @@ public class autoTester {
             }
             try {
                 if (testBasket.getProducts() != null) {
-                    errors++;
-                    System.out.println("[BASIC TESTER] nonzero Reservations[] in empty basket");
+                    if (testBasket.getProducts().length != 0) {
+                        errors++;
+                        System.out.println("[BASIC TESTER] nonzero Reservations[] in empty basket");
+                    }
                 }
             } catch (Exception e) {
                 errors++;
@@ -361,5 +363,9 @@ public class autoTester {
             System.out.println("[CRUEL TESTER] You failed with " + errors + " errors :(");
             return false;
         }
+    }
+
+    public randomTravelAgency getRand() {
+        return rand;
     }
 }

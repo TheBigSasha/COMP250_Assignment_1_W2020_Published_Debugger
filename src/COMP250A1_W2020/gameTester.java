@@ -24,6 +24,8 @@ public class gameTester {
             System.out.println("[3] Remove the last FlightReservation [4] Remove the last HotelReservation [5] Remove the last BnBReservation");
             System.out.println("[6] Clear Cart [7] Checkout [8] Add funds [9] GetNumberofReservations [10] Get Reservations");
             System.out.println("[11] Get total cost [12] AutoTester [13] MiniTester [14] SyntaxTester [15] Reset Game");
+            System.out.println("[16] Run cruelTester (random) [17] Loop cruel tester [18] Run cruel tester with seed");
+            System.out.println("[19] Help me!");
             int input = scanner.nextInt();
             int addAgain;
             int randOrUsr;
@@ -163,6 +165,31 @@ public class gameTester {
                     break;
                 case 15:
                     reset();
+                    break;
+                case 16:
+                    new autoTester().cruelTest();
+                    break;
+                case 17:
+                    System.out.println("How many iterations?");
+                    int iterations = scanner.nextInt();
+                    int i = 0;
+                    while (i <= iterations) {
+                        autoTester current = new autoTester();
+                        System.out.println("For iteration " + i + " seed is " + current.getRand().getSeed());
+                        current.cruelTest();
+                        i++;
+                    }
+                    System.out.println("Ran for " + i + " iterations.");
+                    break;
+                case 18:
+                    System.out.println("What seed? [INT]");
+                    int inputSeed = scanner.nextInt();
+                    new autoTester(inputSeed).cruelTest();
+                    break;
+                case 19:
+                    System.out.println("Contact the dev at sasha@sashaphoto.ca | alexander.aleshchenko@mail.mcgill.ca");
+                    break;
+                default:
                     break;
 
             }

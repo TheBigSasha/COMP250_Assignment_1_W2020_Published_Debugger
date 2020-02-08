@@ -7,7 +7,7 @@ package COMP250A1_W2020;
  */
 public class SuperTester {
     public static void main(String[] args) {
-        System.out.println("Welcome to Sasha's megatester!");
+        System.out.println("Welcome to Sasha's megatester!              |               Vist sashaphoto.ca");
         try {
             SyntaxTester.main(new String[]{""}); //The prof's first tester
         } catch (Exception e) {
