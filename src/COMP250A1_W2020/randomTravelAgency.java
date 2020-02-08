@@ -131,7 +131,8 @@ public class randomTravelAgency extends Random {
         try {
             return new HotelReservation(inputName, nextHotel(), nextRoomType(), numberOfNights);
         } catch (IllegalArgumentException e) {
-            return nextHotelReservation();
+            Room[] allRooms = {new Room("double"), new Room("queen"), new Room("king"), new Room("double"), new Room("queen"), new Room("king"), new Room("double"), new Room("queen"), new Room("king")};
+            return new HotelReservation(inputName, new Hotel(inputName, allRooms), "queen", numberOfNights);//TODO: this is jank with random room type.
         }
     }
 
