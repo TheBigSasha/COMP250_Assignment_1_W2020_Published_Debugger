@@ -191,8 +191,8 @@ public class gameTester {
                     break;
                 case 20:
                     autoTester deep = new autoTester(true);
-                    deep.cruelTest();
-                    System.out.println("Seed is " + deep.getRand().getSeed());
+                    deep.runTest();
+                    //System.out.println("Seed is " + deep.getRand().getSeed());
                     break;
                 default:
                     break;

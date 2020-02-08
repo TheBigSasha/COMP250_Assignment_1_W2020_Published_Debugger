@@ -24,6 +24,7 @@ public class autoTester {
     }
 
     public autoTester(boolean deepDebug) {
+        rand = new randomTravelAgency();
         if (deepDebug) {
             this.deepDebug = true;
         } else {
@@ -300,10 +301,10 @@ public class autoTester {
 
     public boolean cruelTest() {
         if (deepDebug) {
-            System.out.println("[CRUEL TESTER] Welcome to the cruel tester");
+            System.out.println("[CRUEL TESTER] Welcome to the cruel tester with Deep Debugging enabled");
         }
         int errors = 0;
-        Customer[] customers = {rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer()};
+        Customer[] customers = new Customer[]{rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer()};
         for (int i = 0; i < customers.length; i++) {
             if (deepDebug) {
                 System.out.println("[CRUEL TESTER] Testing customer " + i);
