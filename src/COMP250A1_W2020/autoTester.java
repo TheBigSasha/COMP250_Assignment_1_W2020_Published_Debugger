@@ -8,6 +8,8 @@ package COMP250A1_W2020;
 public class autoTester {
     private randomTravelAgency rand;
 
+    private boolean deepDebug = false;
+
     public autoTester() {
         rand = new randomTravelAgency();
         runTest();
@@ -21,9 +23,9 @@ public class autoTester {
         rand = new randomTravelAgency(inputName, inputSeed);
     }
 
-    public autoTester(boolean cruelTester) {
-        if (cruelTester) {
-            cruelTest();
+    public autoTester(boolean deepDebug) {
+        if (deepDebug) {
+            this.deepDebug = true;
         } else {
             runTest();
         }
@@ -297,11 +299,15 @@ public class autoTester {
     }
 
     public boolean cruelTest() {
-        //System.out.println("[CRUEL TESTER] Welcome to the cruel tester");
+        if (deepDebug) {
+            System.out.println("[CRUEL TESTER] Welcome to the cruel tester");
+        }
         int errors = 0;
         Customer[] customers = {rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer()};
         for (int i = 0; i < customers.length; i++) {
-            //System.out.println("[CRUEL TESTER] Testing customer " + i);
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] Testing customer " + i);
+            }
             customers[i].addToBasket(rand.nextAirport(), rand.nextAirport());
             HotelReservation current;
             try {
@@ -317,20 +323,28 @@ public class autoTester {
             customers[i].addToBasket(toBeKept);
             //TODO: Compare number of things added, getnumofreservations, and addtobasket outputs
 
-            //System.out.println("[CRUEL TESTER] After adding 4 reservations, customer " + i + " has " + customers[i].getBasket().getNumOfReservations() + " reservation(s)");
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] After adding 4 reservations, customer " + i + " has " + customers[i].getBasket().getNumOfReservations() + " reservation(s)");
+            }
             boolean passed = false;
             boolean canRemove = customers[i].removeFromBasket(toBeRemoved);
-            //System.out.println("[CRUEL TESTER] After removing 1 reservation, customer " + i + " has " + customers[i].getBasket().getNumOfReservations() + " reservation(s)");
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] After removing 1 reservation, customer " + i + " has " + customers[i].getBasket().getNumOfReservations() + " reservation(s)");
+            }
             if (canRemove) {
                 for (int j = 0; j < customers[i].getBasket().getProducts().length; j++) {
                     try {
-                        //System.out.println("[CRUEL TESTER] Number of products being tested is " + (customers[i].getBasket().getProducts().length));
+                        if (deepDebug) {
+                            System.out.println("[CRUEL TESTER] Number of products being tested is " + (customers[i].getBasket().getProducts().length));
+                        }
                         if (customers[i].getBasket().getProducts()[j].equals(toBeRemoved)) {
                             errors++;
                             System.out.println("[CRUEL TESTER] the reservation to be removed was kept in place " + j);
                         }
                         if (customers[i].getBasket().getProducts()[j].equals(toBeKept)) {
-                            //System.out.println("[CRUEL TESTER] the reservation to be kept was kept :) It's in place " + j);
+                            if (deepDebug) {
+                                System.out.println("[CRUEL TESTER] the reservation to be kept was kept :) It's in place " + j);
+                            }
                             passed = true;
                         }
                     } catch (NullPointerException e) {
@@ -359,7 +373,9 @@ public class autoTester {
                 errors++;
                 System.out.println("[CRUEL TESTER] Balance should be 0");
             }
-            //System.out.println("[CRUEL TESTER] Test concluded for customer " + i);
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] Test concluded for customer " + i);
+            }
         }
         if (errors == 0) {
             System.out.println("[CRUEL TESTER] You passed!");

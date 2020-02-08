@@ -175,7 +175,7 @@ public class randomTravelAgency extends Random {
     }
 
     /**
-     * name getter
+     * Name getter
      *
      * <P>gets the working name
      *

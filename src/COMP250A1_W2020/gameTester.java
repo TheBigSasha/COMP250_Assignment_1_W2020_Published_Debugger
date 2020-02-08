@@ -25,7 +25,7 @@ public class gameTester {
             System.out.println("[6] Clear Cart [7] Checkout [8] Add funds [9] GetNumberofReservations [10] Get Reservations");
             System.out.println("[11] Get total cost [12] AutoTester [13] MiniTester [14] SyntaxTester [15] Reset Game");
             System.out.println("[16] Run cruelTester (random) [17] Loop cruel tester [18] Run cruel tester with seed");
-            System.out.println("[19] Help me!");
+            System.out.println("[19] Help me! [20] Run cruelTester (with deepDebug)");
             int input = scanner.nextInt();
             int addAgain;
             int randOrUsr;
@@ -188,6 +188,11 @@ public class gameTester {
                     break;
                 case 19:
                     System.out.println("Contact the dev at sasha@sashaphoto.ca | alexander.aleshchenko@mail.mcgill.ca");
+                    break;
+                case 20:
+                    autoTester deep = new autoTester(true);
+                    deep.cruelTest();
+                    System.out.println("Seed is " + deep.getRand().getSeed());
                     break;
                 default:
                     break;
