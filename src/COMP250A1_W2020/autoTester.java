@@ -303,7 +303,12 @@ public class autoTester {
         for (int i = 0; i < customers.length; i++) {
             //System.out.println("[CRUEL TESTER] Testing customer " + i);
             customers[i].addToBasket(rand.nextAirport(), rand.nextAirport());
-            customers[i].addToBasket(rand.nextHotelReservation());
+            HotelReservation current;
+            try {
+                current = rand.nextHotelReservation();
+                customers[i].addToBasket(current);
+            } catch (IllegalArgumentException e) {
+            }
             Airport AP1 = rand.nextAirport();
             Airport AP2 = rand.nextAirport();
             FlightReservation toBeRemoved = new FlightReservation(customers[i].getName(), AP2, AP1);

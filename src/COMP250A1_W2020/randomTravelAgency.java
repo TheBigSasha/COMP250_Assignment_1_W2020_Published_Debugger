@@ -128,7 +128,11 @@ public class randomTravelAgency extends Random {
      * @return HotelReservation, randomized
      */
     public HotelReservation nextHotelReservation() {
-        return new HotelReservation(inputName, nextHotel(), nextRoomType(), numberOfNights);
+        try {
+            return new HotelReservation(inputName, nextHotel(), nextRoomType(), numberOfNights);
+        } catch (IllegalArgumentException e) {
+            return nextHotelReservation();
+        }
     }
 
     /**
