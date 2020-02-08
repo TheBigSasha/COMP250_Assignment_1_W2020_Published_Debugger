@@ -304,16 +304,31 @@ public class autoTester {
             System.out.println("[CRUEL TESTER] Welcome to the cruel tester with Deep Debugging enabled");
         }
         int errors = 0;
+        if (deepDebug) {
+            System.out.println("[CRUEL TESTER] Creating an array of randomized customers");
+        }
         Customer[] customers = new Customer[]{rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer(), rand.nextCustomer()};
+        if (deepDebug) {
+            System.out.println("[CRUEL TESTER] Randomized customer array created");
+        }
         for (int i = 0; i < customers.length; i++) {
             if (deepDebug) {
                 System.out.println("[CRUEL TESTER] Testing customer " + i);
             }
             customers[i].addToBasket(rand.nextAirport(), rand.nextAirport());
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] Added random flightReservation to basket using 2 airports constructor");
+            }
             HotelReservation current;
             try {
+                if (deepDebug) {
+                    System.out.println("[CRUEL TESTER] Trying to add a random hotel reservation to basket.");
+                }
                 current = rand.nextHotelReservation();
                 customers[i].addToBasket(current);
+                if (deepDebug) {
+                    System.out.println("[CRUEL TESTER] Added a random hotel reservation to basket");
+                }
             } catch (IllegalArgumentException e) {
                 if (deepDebug) {
                     System.out.println("[CRUEL TESTER] Hotel creation threw expected exception " + e + "This is normal behaviour if the hotel created has no rooms of the right type. If this happens every time you have a problem.");
@@ -321,10 +336,16 @@ public class autoTester {
             }
             Airport AP1 = rand.nextAirport();
             Airport AP2 = rand.nextAirport();
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] Generated random airports");
+            }
             FlightReservation toBeRemoved = new FlightReservation(customers[i].getName(), AP2, AP1);
             FlightReservation toBeKept = new FlightReservation(customers[i].getName(), AP1, AP2);
             customers[i].addToBasket(toBeRemoved);
             customers[i].addToBasket(toBeKept);
+            if (deepDebug) {
+                System.out.println("[CRUEL TESTER] Added 2 flight reservations to cart created using the random airports");
+            }
             //TODO: Compare number of things added, getnumofreservations, and addtobasket outputs
 
             if (deepDebug) {

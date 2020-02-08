@@ -25,12 +25,19 @@ public class gameTester {
             System.out.println("[6] Clear Cart [7] Checkout [8] Add funds [9] GetNumberofReservations [10] Get Reservations");
             System.out.println("[11] Get total cost [12] AutoTester [13] MiniTester [14] SyntaxTester [15] Reset Game");
             System.out.println("[16] Run cruelTester (random) [17] Loop cruel tester [18] Run cruel tester with seed");
-            System.out.println("[19] Help me! [20] Run cruelTester (with deepDebug)");
+            System.out.println("[19] Help me! [20] Run cruelTester (with deepDebug) [21] Run random GameTest");
             int input = scanner.nextInt();
-            int addAgain;
-            int randOrUsr;
-            switch (input) {
-                case 0:
+            gameMenu(input, false);
+        }
+
+    }
+
+    private static void gameMenu(int input, boolean random) {
+        int addAgain;
+        int randOrUsr;
+        switch (input) {
+            case 0:
+                if (!random) {
                     System.out.println("Random [0] or user [1]?");
                     randOrUsr = scanner.nextInt();
                     if (randOrUsr == 1) {
@@ -60,146 +67,184 @@ public class gameTester {
                             break;
                         }
                     }
-                    break;
-                case 1:
+                } else {
+                    latestFlightReservation = rand.nextFlightReservation();
+                    customer.addToBasket(latestFlightReservation);
+                    System.out.println("Added a random flight reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                    while (true) {
+                        addAgain = rand.nextInt(188);
+                        if (addAgain == 0) {
+                            customer.addToBasket(latestFlightReservation);
+                            System.out.println("Added a duplicate of the last flight reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                break;
+            case 1:
+                if (random) {
                     latestHotelReservation = rand.nextHotelReservation();
                     customer.addToBasket(latestHotelReservation);
-                    System.out.println("Added a random hotel reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
-                    while (true) {
-                        System.out.println("Add again? [0] yes /[1] no");
-                        addAgain = scanner.nextInt();
-                        if (addAgain == 0) {
-                            customer.addToBasket(latestHotelReservation);
-                            System.out.println("Added a duplicate of the last hotel reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
-                        } else {
-                            break;
-                        }
-                    }
+                    System.out.println("Random: added a random hotel reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
                     break;
-                case 2:
-                    latestBnBReservation = rand.nextBnBReservation();
-                    customer.addToBasket(latestBnBReservation);
-                    System.out.println("Added a random BnB reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
-                    while (true) {
-                        System.out.println("Add again? [0] yes /[1] no");
-                        addAgain = scanner.nextInt();
-                        if (addAgain == 0) {
-                            customer.addToBasket(latestBnBReservation);
-                            System.out.println("Added a duplicate of the last BnB reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
-                        } else {
-                            break;
-                        }
+                }
+                latestHotelReservation = rand.nextHotelReservation();
+                customer.addToBasket(latestHotelReservation);
+                System.out.println("Added a random hotel reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                while (!random) {
+                    System.out.println("Add again? [0] yes /[1] no");
+                    addAgain = scanner.nextInt();
+                    if (addAgain == 0) {
+                        customer.addToBasket(latestHotelReservation);
+                        System.out.println("Added a duplicate of the last hotel reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                    } else {
+                        break;
                     }
-                    break;
-                case 3:
-                    try {
-                        customer.removeFromBasket(latestFlightReservation);
-                        System.out.println("Removed last FlightReservation " + customer.getBasket().getNumOfReservations() + " items");
-                        System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
-                        System.out.println("removes everything or just the specifically requested item.");
-                    } catch (NullPointerException e) {
-                        System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
+                }
+                break;
+            case 2:
+                latestBnBReservation = rand.nextBnBReservation();
+                customer.addToBasket(latestBnBReservation);
+                System.out.println("Added a random BnB reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                while (!random) {
+                    System.out.println("Add again? [0] yes /[1] no");
+                    addAgain = scanner.nextInt();
+                    if (addAgain == 0) {
+                        customer.addToBasket(latestBnBReservation);
+                        System.out.println("Added a duplicate of the last BnB reservation to cart. Cart has " + customer.getBasket().getNumOfReservations() + " items");
+                    } else {
+                        break;
                     }
+                }
+                break;
+            case 3:
+                try {
+                    customer.removeFromBasket(latestFlightReservation);
+                    System.out.println("Removed last FlightReservation " + customer.getBasket().getNumOfReservations() + " items");
+                    System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
+                    System.out.println("removes everything or just the specifically requested item.");
+                } catch (NullPointerException e) {
+                    System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
+                }
 
-                    break;
-                case 4:
-                    try {
-                        customer.removeFromBasket(latestHotelReservation);
-                        System.out.println("Removed last HotelReservation " + customer.getBasket().getNumOfReservations() + " items");
-                        System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
-                        System.out.println("removes everything or just the specifically requested item.");
-                    } catch (NullPointerException e) {
-                        System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
-                    }
-                    break;
-                case 5:
-                    try {
-                        customer.removeFromBasket(latestBnBReservation);
-                        System.out.println("Removed last BnBReservation " + customer.getBasket().getNumOfReservations() + " items");
-                        System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
-                        System.out.println("removes everything or just the specifically requested item.");
-                    } catch (NullPointerException e) {
-                        System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
-                    }
-                    break;
-                case 6:
-                    customer.getBasket().clear();
-                    System.out.println("Cart Cleared. Customer cart now has " + customer.getBasket().getNumOfReservations() + " items");
-                    break;
-                case 7:
-                    try {
-                        customer.checkOut();
-                        System.out.println("Checkout successful!");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e + " not enough $? ");
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                    break;
-                case 8:
+                break;
+            case 4:
+                try {
+                    customer.removeFromBasket(latestHotelReservation);
+                    System.out.println("Removed last HotelReservation " + customer.getBasket().getNumOfReservations() + " items");
+                    System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
+                    System.out.println("removes everything or just the specifically requested item.");
+                } catch (NullPointerException e) {
+                    System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
+                }
+                break;
+            case 5:
+                try {
+                    customer.removeFromBasket(latestBnBReservation);
+                    System.out.println("Removed last BnBReservation " + customer.getBasket().getNumOfReservations() + " items");
+                    System.out.println("This remove only removes the latest reservation or copies of it. This is to test whether remove");
+                    System.out.println("removes everything or just the specifically requested item.");
+                } catch (NullPointerException e) {
+                    System.out.println("you have not made a reservation of this type and thus cannot cancel it.");
+                }
+                break;
+            case 6:
+                customer.getBasket().clear();
+                System.out.println("Cart Cleared. Customer cart now has " + customer.getBasket().getNumOfReservations() + " items");
+                break;
+            case 7:
+                try {
+                    customer.checkOut();
+                    System.out.println("Checkout successful!");
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e + " not enough $? ");
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                break;
+            case 8:
+                if (!random) {
                     System.out.println("How much to add (IN CENTS)? You presently have $" + (customer.getBalance() / 100.0));
                     int toAdd = scanner.nextInt();
                     customer.addFunds(toAdd);
                     System.out.println("You now have $ " + +(customer.getBalance() / 100.0));
-                    break;
-                case 9:
-                    System.out.println("You have " + customer.getBasket().getNumOfReservations() + " Reservations. ");
-                    break;
-                case 10:
-                    for (int i = 0; i < customer.getBasket().getNumOfReservations(); i++) {
-                        System.out.print(customer.getBasket().getProducts()[i].getClass().getName() + ", ");
-                    }
-                    System.out.println();
-                    break;
-                case 11:
-                    System.out.println("Total cost is " + (float) (customer.getBasket().getTotalCost()) / 100.0);
-                    break;
-                case 12:
-                    new autoTester().runTest();
-                    break;
-                case 13:
-                    MiniTester.main(new String[0]);
-                    break;
-                case 14:
-                    SyntaxTester.main(new String[0]);
-                    break;
-                case 15:
-                    reset();
-                    break;
-                case 16:
-                    new autoTester().cruelTest();
-                    break;
-                case 17:
-                    System.out.println("How many iterations?");
-                    int iterations = scanner.nextInt();
-                    int i = 0;
-                    while (i <= iterations) {
-                        autoTester current = new autoTester();
-                        System.out.println("For iteration " + i + " seed is " + current.getRand().getSeed());
-                        current.cruelTest();
-                        i++;
-                    }
-                    System.out.println("Ran for " + i + " iterations.");
-                    break;
-                case 18:
-                    System.out.println("What seed? [INT]");
-                    int inputSeed = scanner.nextInt();
-                    new autoTester(inputSeed).cruelTest();
-                    break;
-                case 19:
-                    System.out.println("Contact the dev at sasha@sashaphoto.ca | alexander.aleshchenko@mail.mcgill.ca");
-                    break;
-                case 20:
-                    autoTester deep = new autoTester(true);
-                    deep.runTest();
-                    //System.out.println("Seed is " + deep.getRand().getSeed());
-                    break;
-                default:
-                    break;
+                } else {
+                    customer.addFunds(rand.nextInt(18500));
+                    System.out.println("You now have $ " + +(customer.getBalance() / 100.0));
+                }
+                break;
+            case 9:
+                System.out.println("You have " + customer.getBasket().getNumOfReservations() + " Reservations. ");
+                break;
+            case 10:
+                for (int i = 0; i < customer.getBasket().getNumOfReservations(); i++) {
+                    System.out.print(customer.getBasket().getProducts()[i].getClass().getName() + ", ");
+                }
+                System.out.println();
+                break;
+            case 11:
+                System.out.println("Total cost is " + (float) (customer.getBasket().getTotalCost()) / 100.0);
+                break;
+            case 12:
+                new autoTester().runTest();
+                break;
+            case 13:
+                MiniTester.main(new String[0]);
+                break;
+            case 14:
+                SyntaxTester.main(new String[0]);
+                break;
+            case 15:
+                reset();
+                break;
+            case 16:
+                new autoTester().cruelTest();
+                break;
+            case 17:
+                System.out.println("How many iterations?");
+                int iterations = scanner.nextInt();
+                int i = 0;
+                while (i <= iterations) {
+                    autoTester current = new autoTester();
+                    System.out.println("For iteration " + i + " seed is " + current.getRand().getSeed());
+                    current.cruelTest();
+                    i++;
+                }
+                System.out.println("Ran for " + i + " iterations.");
+                break;
+            case 18:
+                System.out.println("What seed? [INT]");
+                int inputSeed = scanner.nextInt();
+                new autoTester(inputSeed).cruelTest();
+                break;
+            case 19:
+                System.out.println("Contact the dev at sasha@sashaphoto.ca | alexander.aleshchenko@mail.mcgill.ca");
+                break;
+            case 20:
+                autoTester deep = new autoTester(true);
+                deep.runTest();
+                System.out.println("Seed is " + deep.getRand().getSeed());
+                break;
+            case 21:
+                System.out.println("How many iterations * 100?");
+                long iterates = scanner.nextInt() * 100;
+                long j = 0;
+                while (j <= iterates) {
+                    int choice = (int) Math.floor(Math.sqrt(rand.nextInt(121)));
+                    System.out.println("[RANDOMIZED GameTester] Choice of the randomizer is: " + choice);
+                    gameMenu(choice, true);
+                    j++;
+                }
+                System.out.println("Ran for " + j + " iterations.");
+                gameMenu(9, true);
+                gameMenu(10, true);
+                gameMenu(11, true);
+                break;
+            default:
+                break;
 
-            }
         }
-
     }
 
     private static void reset() {
