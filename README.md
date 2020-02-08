@@ -33,7 +33,10 @@ Try the game tester with your problem, to see if you can recreate it by calling 
 
 To run a repeatable cruel tester, use a seed. Cruel tester is randomized and designed to be looped to test a variety of edge cases and strange behaviours. It is normal to sometimes fail cruel tester due to an illegal argument exception (as of current version, this will be patched) if it creates a hotel without the rooms it needs.
 
+#Why GameTester?
 
+GameTester is used to test your theories as to why a method doesn't work. 
+Do you think add is broken when the cart has 0 items? Try it out. Do you think that remove removes all instances of identical reservations instead of just the first occurance? Test it for yourself! It is the most powerful tool in the package.
 
 # NOTE:
 You are expected to have your own classes written as assigned which pass the Syntax Tester for this to run.
