@@ -1,11 +1,25 @@
 # COMP250 Assignment 1 Winter 2020 Debugger
 A series of testers for COMP250 Assignment 1 at McGill University.
 
-To test your program:
+# Install Instructions
 
-Clone this repository into your project directory.
+For IntelliJ IDEA (recommended)
 
-Change your package name to the correct name. (COMP250A1_W2020)
+VCS -> Get from Version Control... -> Paste the URL of this repository
+
+For Eclipse
+
+File -> Import -> Git -> Projects from Git (With Smart Import) -> Clone URI -> paste URL of this repository into the URI box -> Click next a bunch, setting directory at your own discression, Master branch from origin. All else default -> Finish
+
+For both:
+
+Drag your .java files from the assignment into the tester package.
+
+In case your IDE does not automatically set package name, change your package name to COMP250A1_W2020
+
+Regularly update the tester (pull the repository). Your assignment files will be ignored.
+
+# To test your program:
 
 Run SuperTester.java
 
@@ -21,7 +35,7 @@ To run a repeatable cruel tester, use a seed. Cruel tester is randomized and des
 
 
 
-NOTE:
+# NOTE:
 You are expected to have your own classes written as assigned which pass the Syntax Tester for this to run.
 
 This repository will ignore correctly named class files from the assignment, so pulling it to your project will have no effect on existing code.
