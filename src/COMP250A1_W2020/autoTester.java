@@ -315,6 +315,9 @@ public class autoTester {
                 current = rand.nextHotelReservation();
                 customers[i].addToBasket(current);
             } catch (IllegalArgumentException e) {
+                if (deepDebug) {
+                    System.out.println("[CRUEL TESTER] Hotel creation threw expected exception " + e + "This is normal behaviour if the hotel created has no rooms of the right type. If this happens every time you have a problem.");
+                }
             }
             Airport AP1 = rand.nextAirport();
             Airport AP2 = rand.nextAirport();
