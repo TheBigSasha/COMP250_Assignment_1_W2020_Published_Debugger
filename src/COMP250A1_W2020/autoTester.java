@@ -288,7 +288,9 @@ public class autoTester {
             return "[BASIC TESTER] Test concluded with " + errors + " errors";
         } else {
             System.out.println("[BASIC TESTER] All tests passed. Escalating to CRUEL TESTER");
+            deepDebug = true;
             boolean passedCruel = cruelTest();
+            deepDebug = false;
             if (passedCruel) {
                 return "Congrats, all tests passed.";
             } else {
